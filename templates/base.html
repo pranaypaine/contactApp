@@ -1,0 +1,76 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+<title>{% block title %}Contacts{% endblock %}</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css"  media="screen,projection"/>
+</head>
+<body>
+
+<!-- navbar starts -->
+<nav class="blue darken-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href='{% url "list" %}' class="brand-logo">ContactsApp</a>
+    
+      <ul class="right hide-on-med-and-down">
+      <li><a href='{% url "list" %}'>Contacts</a></li>
+        <li><a href='{% url "sent" %}'>Messages Sent</a></li>
+      </ul>
+      
+      <ul id="nav-mobile" class="side-nav ">
+      <li><a href='{% url "list" %}'>Contacts</a></li>
+        <li><a href='{% url "sent" %}'>Messages Sent</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+
+    </div>
+  </nav>
+
+
+<div class="container">
+	{% block content %}
+		
+	
+
+  {% endblock content %}
+
+</div>
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+<script type="text/javascript">
+
+    $(document).on('submit', '#add-contact-form', function(e){
+        
+        
+        $.ajax({
+          type: 'POST',
+          url: '/create/',
+          data:{
+            name: $('#contactname').val(),
+            number: $('#contactnumber').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+          },
+
+          sucess:function(){
+            alert('saved');
+          }
+    });
+  });
+
+</script>
+<script type="text/javascript">
+	
+  $(document).ready(function(){
+    $('.tooltipped').tooltip({delay: 50}, 'rounded');
+    $(".dropdown-button").dropdown();
+    $(".button-collapse").sideNav();
+    $('.parallax').parallax();
+    $('.modal-trigger').leanModal();
+  });
+</script>
+</body>
+</html>

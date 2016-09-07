@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+
+{% if data %}
+
+{% for contact_data in data %}
+<ul class="collection z-depth-1 hoverable">
+    <li class="collection-item avatar">
+    	{% if contact_data.image %}
+    	<img src="{{ contact_data.image.url }}" alt="" class="circle">
+    	{% else %}
+      <i class="material-icons circle blue">contact_phone</i>
+      {% endif %}
+      <span class="title">{{ contact_data.name|title }}</span>
+      <p>{{ contact_data.number }}</p>
+      <a href="{{ contact_data.get_absolute_url }}" class="secondary-content"><i class="material-icons blue-text">send</i></a>
+    </li>
+</ul>
+{% endfor %}
+{% endif %}
+
+
+<div class="fixed-action-btn " style="bottom: 45px; right: 40px;">
+    <a href="#create-contact" class="btn-floating btn-large blue darken-1 z-depth-5 btn tooltipped modal-trigger" data-position="left" data-delay="50" data-tooltip="Create contact">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
+
+
+<div id="create-contact" class="modal">
+    <form method="POST" action="" id="add-contact-form">{% csrf_token %}
+    <div class="modal-content">
+    <h5>Add A New Contact</h5>
+    <input type="text" name="contactname" id="contactname" placeholder="Enter Contact Name">
+    <input type="tel" name="contactnumber" id="contactnumber" placeholder="Enter Contact Number">
+    </div>
+    <div class="modal-footer">
+      <button class="btn waves-effect waves-light grey lighten-5 blue-text" type="submit" name="submit">Add
+        <i class="material-icons right">send</i>
+        </button>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+    </form>
+  </div>
+          
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sent messages
+{% endblock %}
+
+{% block content %}
+
+{% if data %}
+
+{% for messagesent in data %}
+<ul class="collection z-depth-1 hoverable">
+    <li class="collection-item avatar">
+    	{% if messagesent.image %}
+    	<img src="{{ messagesent.image.url }}" alt="" class="circle">
+    	{% else %}
+      <i class="material-icons circle blue">chat</i>
+      {% endif %}
+      <span class="title">{{ messagesent.name|title }}</span>
+      <p>{{ messagesent.message }}</p>
+      <p>{{ messagesent.senton|timesince }} ago</p>
+      
+    </li>
+</ul>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+<h3 class="blue-text center">Send Message</h3>
+
+	<div class="row">
+        <div class="col s12">
+          <div class="card grey lighten-4">
+            <div class="card-content white-text">
+              <span class="card-title blue-text center">{{ instance.name|title }}</span>
+              <p class="blue-text">{{ instance.number }}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+
+<div class="row">
+    <form class="col s12" method="POST">{% csrf_token %}
+      <div class="row">
+        <div class="input-field col s12">
+          <input value="Hi. Your OTP is : {{ otp }}" name="otp" id="otp" type="text" readonly="yes">
+        </div>
+    </div>
+    <button class="btn waves-effect waves-light grey lighten-5 blue-text center" type="submit" name="submit">Send OTP
+        <i class="material-icons right">send</i>
+        </button>
+	</form>
+</div>
+
+{% endblock %}
