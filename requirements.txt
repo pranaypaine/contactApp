@@ -1,5 +1,5 @@
 Django==1.11.29
-httplib2==0.18.0
+httplib2==0.19.0
 pytz==2016.6.1
 six==1.10.0
 twilio==5.5.0
